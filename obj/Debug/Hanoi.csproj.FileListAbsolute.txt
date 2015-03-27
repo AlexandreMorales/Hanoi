@@ -1,0 +1,6 @@
+C:\Users\afraga\Documents\Visual Studio 2013\Projects\Explorador_Marte\Hanoi\bin\Debug\Hanoi.exe.config
+C:\Users\afraga\Documents\Visual Studio 2013\Projects\Explorador_Marte\Hanoi\bin\Debug\Hanoi.exe
+C:\Users\afraga\Documents\Visual Studio 2013\Projects\Explorador_Marte\Hanoi\bin\Debug\Hanoi.pdb
+C:\Users\afraga\Documents\Visual Studio 2013\Projects\Explorador_Marte\Hanoi\obj\Debug\Hanoi.exe
+C:\Users\afraga\Documents\Visual Studio 2013\Projects\Explorador_Marte\Hanoi\obj\Debug\Hanoi.pdb
+C:\Users\afraga\Documents\Visual Studio 2013\Projects\Explorador_Marte\Hanoi\obj\Debug\Hanoi.csprojResolveAssemblyReference.cache
