@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Hanoi
 {
@@ -14,6 +10,7 @@ namespace Hanoi
         int tamanho;
         public Jogo()
         {
+            torres = new Torre[qtdeTorres];
             do
             {
                 Console.Clear();
@@ -28,26 +25,29 @@ namespace Hanoi
         }
         private void start()
         {
-        aqui:
-            try
+            bool conversao = true;
+            while (conversao)
             {
-                torres = new Torre[qtdeTorres];
-                Console.Write("Com quantas peças irá jogar? ");
-                tamanho = Convert.ToInt32(Console.ReadLine());
-                for (int i = 0; i < qtdeTorres; i++)
+                try
                 {
-                    torres[i] = new Torre(tamanho + 1);
-                    if (i == 0)
-                        torres[i].PopulaTorre();
-                    else
-                        torres[i].PopulaTorreVazia();
+                    Console.Write("Com quantas peças irá jogar? ");
+                    tamanho = Convert.ToInt32(Console.ReadLine());
+                    for (int i = 0; i < qtdeTorres; i++)
+                    {
+                        torres[i] = new Torre(tamanho + 1);
+                        if (i == 0)
+                            torres[i].PopulaTorre();
+                        else
+                            torres[i].PopulaTorreVazia();
+                    }
+                    MostraTorre();
+                    conversao = false;
                 }
-                MostraTorre();
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Por favor, apenas numeros.");
-                goto aqui;
+                catch (FormatException)
+                {
+                    Console.WriteLine("Por favor, apenas numeros.");
+                    conversao = true;
+                }
             }
         }
         private int jogar()
@@ -77,48 +77,55 @@ namespace Hanoi
         }
         private void fazColocada(ref bool colocadaCerta, Torre torreTirada, ref Torre torreColocada)
         {
-        aqui:
-            try
+            bool conversao = true;
+            while (conversao)
             {
-                colocadaCerta = true;
-                Console.Write("Em qual torre você quer botar o disco retirado? ");
-                int t = Convert.ToInt32(Console.ReadLine());
-                if (t <= qtdeTorres && t > 0)
-                    torreColocada = torres[t - 1];
-                else
-                    colocadaCerta = false;
-                if (colocadaCerta)
-                    colocadaCerta = colocaNaTorre(torreColocada, torreTirada);
-                if (!colocadaCerta)
-                    Console.Write("Ouve algum erro, por favor diga ");
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Por favor, apenas numeros.");
-                goto aqui;
+                try
+                {
+                    colocadaCerta = true;
+                    Console.Write("Em qual torre você quer botar o disco retirado? ");
+                    int t = Convert.ToInt32(Console.ReadLine());
+                    if (t <= qtdeTorres && t > 0)
+                        torreColocada = torres[t - 1];
+                    else
+                        colocadaCerta = false;
+                    if (colocadaCerta)
+                        colocadaCerta = colocaNaTorre(torreColocada, torreTirada);
+                    if (!colocadaCerta)
+                        Console.Write("Ouve algum erro, por favor diga ");
+                    conversao = !colocadaCerta;
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Por favor, apenas numeros.");
+                    conversao = true;
+                }
             }
         }
         private void fazRetirada(ref bool retiradaCerta, ref Torre torreTirada)
         {
-        aqui:
-            try
-            {
-                retiradaCerta = true;
-                Console.Write("De qual torre você quer tirar o disco superior? ");
-                int t = Convert.ToInt32(Console.ReadLine());
-                if (t <= qtdeTorres && t > 0)
-                    torreTirada = torres[t - 1];
-                else
-                    retiradaCerta = false;
-                if (retiradaCerta)
-                    retiradaCerta = retiraDaTorre(torreTirada);
-                if (!retiradaCerta)
-                    Console.Write("Ouve algum erro, por favor diga ");
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Por favor, apenas numeros.");
-                goto aqui;
+            bool conversao = true;
+            while (conversao) { 
+                try
+                {
+                    retiradaCerta = true;
+                    Console.Write("De qual torre você quer tirar o disco superior? ");
+                    int t = Convert.ToInt32(Console.ReadLine());
+                    if (t <= qtdeTorres && t > 0)
+                        torreTirada = torres[t - 1];
+                    else
+                        retiradaCerta = false;
+                    if (retiradaCerta)
+                        retiradaCerta = retiraDaTorre(torreTirada);
+                    if (!retiradaCerta)
+                        Console.Write("Ouve algum erro, por favor diga ");
+                    conversao = !retiradaCerta;
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Por favor, apenas numeros.");
+                    conversao = true;
+                }
             }
         }
         private bool ConfereCompletado()
